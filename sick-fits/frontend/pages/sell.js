@@ -1,7 +1,9 @@
 const SellPage = () => {
-    return <div>
-        <p>Hey! from sell page</p>
-    </div>
+    return (
+        <>
+            <p>Hey! from sell page</p>
+        </>
+    )
 }
 
 export default SellPage

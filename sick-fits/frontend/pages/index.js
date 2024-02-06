@@ -1,8 +1,9 @@
 const IndexPage = () => {
-    return <>
-        <p>Hey!</p>
-        <code>vars</code>
+  return (
+    <>
+      <p>home</p>
     </>
-}
+  );
+};
 
 export default IndexPage;

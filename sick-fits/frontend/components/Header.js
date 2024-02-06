@@ -1,17 +1,21 @@
 import Link from 'next/link';
 import Nav from './Nav';
+import Logo from './styles/Logo';
+import HeaderStyles from './styles/HeaderStyles';
 
 const Header = () => {
   return (
-    <header>
+    <HeaderStyles>
       <div className="bar">
-        <Link href="/">Sick Fits</Link>
+        <Logo>
+          <Link href="/">Sick Fits</Link>
+        </Logo>
       </div>
       <div className="sub-bar">
         <p>Search</p>
       </div>
       <Nav />
-    </header>
+    </HeaderStyles>
   );
 };
 

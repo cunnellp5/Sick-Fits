@@ -1,11 +1,12 @@
-import { User } from './schemas/User';
-import 'dotenv/config';
-import { config, createSchema } from '@keystone-next/keystone/schema';
 import { createAuth } from '@keystone-next/auth';
+import { config, createSchema } from '@keystone-next/keystone/schema';
 import {
-  withItemData,
   statelessSessions,
+  withItemData,
 } from '@keystone-next/keystone/session';
+import 'dotenv/config';
+import { Product } from './schemas/Product';
+import { User } from './schemas/User';
 
 const databaseURL =
   process.env.DATABASE_URL ||
@@ -37,6 +38,7 @@ export default withAuth(
     lists: createSchema({
       // Schema items go in here
       User,
+      Product,
     }),
     db: {
       adapter: 'knex',

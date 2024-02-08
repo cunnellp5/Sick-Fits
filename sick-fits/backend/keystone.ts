@@ -8,6 +8,7 @@ import 'dotenv/config';
 import { Product } from './schemas/Product';
 import { ProductImage } from './schemas/ProductImage';
 import { User } from './schemas/User';
+import { insertSeedData } from './seed-data';
 
 const databaseURL =
   process.env.DATABASE_URL ||
@@ -46,6 +47,11 @@ export default withAuth(
       adapter: 'knex',
       url: databaseURL,
       dropDatabase: false,
+      onConnect: async (keystone) => {
+        if (process.argv.includes('--seed-data')) {
+          await insertSeedData(keystone);
+        }
+      },
     },
     ui: {
       // Show the UI only for people who pass this test

@@ -1,7 +1,9 @@
+import Products from '../components/Products';
+
 const ProductsPage = () => {
   return (
     <div>
-      <p>Hey! from products page</p>
+      <Products></Products>
     </div>
   );
 };

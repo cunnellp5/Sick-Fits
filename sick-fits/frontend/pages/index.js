@@ -1,9 +1,3 @@
-const IndexPage = () => {
-  return (
-    <>
-      <p>home</p>
-    </>
-  );
-};
+import ProductsPage from './products';
 
-export default IndexPage;
+export default ProductsPage;

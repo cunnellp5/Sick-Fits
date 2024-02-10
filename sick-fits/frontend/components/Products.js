@@ -1,5 +1,7 @@
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/client';
+import styled from 'styled-components';
+import { Product } from './Product';
 
 const ALL_PRODUCTS_QUERY = gql`
   {
@@ -18,6 +20,12 @@ const ALL_PRODUCTS_QUERY = gql`
   }
 `;
 
+const ProductsList = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 60px;
+`;
+
 export default function Products() {
   const { data, error, loading } = useQuery(ALL_PRODUCTS_QUERY);
   console.log(data, error, loading);
@@ -26,22 +34,11 @@ export default function Products() {
 
   return (
     <div>
-      <div>
+      <ProductsList>
         {data.allProducts.map((product) => {
-          return (
-            <div key={product.id}>
-              <img
-                src={product.photo.image.publicUrlTransformed}
-                alt={product.name}
-              />
-              <div>
-                <h3>{product.name}</h3>
-                <p>{product.description}</p>
-              </div>
-            </div>
-          );
+          return <Product product={product} key={product.id} />;
         })}
-      </div>
+      </ProductsList>
     </div>
   );
 }

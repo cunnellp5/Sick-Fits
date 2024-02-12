@@ -1,5 +1,6 @@
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
+import Router from 'next/router';
 import useForm from '../lib/useForm';
 import DisplayError from './ErrorMessage';
 import { ALL_PRODUCTS_QUERY } from './Products';
@@ -50,8 +51,13 @@ export default function CreateProduct() {
       onSubmit={async (e) => {
         e.preventDefault();
         // submit the input fields to the backend; inputs is preloaded with the default values because of the useMutation hook
-        await createProduct();
+        const res = await createProduct();
+
         clearForm();
+
+        Router.push({
+          pathname: `/product/${res.data.createProduct.id}`,
+        });
       }}
     >
       <DisplayError error={error} />

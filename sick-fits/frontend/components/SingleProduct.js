@@ -1,8 +1,9 @@
 import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import Head from 'next/head';
-import DisplayError from './ErrorMessage';
+import PropType from 'prop-types';
 import styled from 'styled-components';
+import DisplayError from './ErrorMessage';
 
 const SINGLE_ITEM_QUERY = gql`
   query SINGLE_ITEM_QUERY($id: ID!) {
@@ -62,3 +63,7 @@ export default function SingleProduct({ id }) {
     </ProductStyles>
   );
 }
+
+SingleProduct.propTypes = {
+  id: PropType.string.isRequired,
+};

@@ -1,4 +1,4 @@
-import { ApolloClient, ApolloProvider } from '@apollo/client';
+import { ApolloProvider } from '@apollo/client';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 import PropTypes from 'prop-types';
@@ -35,7 +35,7 @@ MyApp.getInitialProps = async function ({ Component, ctx }) {
 MyApp.propTypes = {
   Component: PropTypes.elementType.isRequired,
   pageProps: PropTypes.any.isRequired,
-  apollo: PropTypes.instanceOf(ApolloClient).isRequired,
+  apollo: PropTypes.any,
 };
 
 export default withData(MyApp);

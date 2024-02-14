@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import Header from './Header';
 import styled, { createGlobalStyle } from 'styled-components';
+import Header from './Header';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -56,18 +56,15 @@ const InnerStyles = styled.div`
   padding: 2rem;
 `;
 
-const Page = ({ children }) => {
-  return (
-    <div>
-      <GlobalStyle />
-      <Header />
-      <InnerStyles>{children}</InnerStyles>
-    </div>
-  );
-};
+const Page = ({ children }) => (
+  <div>
+    <GlobalStyle />
+    <Header />
+    <InnerStyles>{children}</InnerStyles>
+  </div>
+);
 
 Page.propTypes = {
-  cool: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,

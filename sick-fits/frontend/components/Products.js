@@ -35,9 +35,9 @@ export default function Products() {
   return (
     <div>
       <ProductsList>
-        {data.allProducts.map((product) => {
-          return <Product product={product} key={product.id} />;
-        })}
+        {data.allProducts.map((product) => (
+          <Product product={product} key={product.id} />
+        ))}
       </ProductsList>
     </div>
   );

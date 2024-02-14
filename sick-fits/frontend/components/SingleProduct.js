@@ -44,7 +44,7 @@ export default function SingleProduct({ id }) {
   //   const { Product } = data;
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <DisplayError error={error}></DisplayError>;
+  if (error) return <DisplayError error={error} />;
 
   return (
     <ProductStyles>
@@ -54,7 +54,7 @@ export default function SingleProduct({ id }) {
       <img
         src={data.Product.photo.image.publicUrlTransformed}
         alt={data.Product.name}
-      ></img>
+      />
       <div className="details">
         <h2>{data.Product.name}</h2>
         <p>{data.Product.description}</p>

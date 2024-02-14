@@ -5,6 +5,7 @@ export default class MyDocument extends Document {
   static async getInitialProps({ renderPage }) {
     const sheet = new ServerStyleSheet();
     const page = renderPage(
+      // eslint-disable-next-line react/jsx-props-no-spreading
       (App) => (props) => sheet.collectStyles(<App {...props} />)
     );
     const styleTags = sheet.getStyleElement();

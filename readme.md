@@ -19,6 +19,7 @@ Backend
 
 ## Todo
 
+- [ ] proptype everything
 - [ ] Add a theme toggle from CMS
 - [ ] Update FrontEnd with dynamic theme
 - [ ] Addon holiday styles

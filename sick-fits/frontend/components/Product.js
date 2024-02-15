@@ -21,7 +21,7 @@ export const Product = ({ product }) => (
           query: { id: product.id },
         }}
       >
-        Edit -
+        Edit ✏️
       </Link>
     </div>
   </ItemStyles>

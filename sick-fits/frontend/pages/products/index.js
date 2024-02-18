@@ -1,12 +1,18 @@
+import { useRouter } from 'next/dist/client/router';
 import Pagination from '../../components/Pagination';
 import Products from '../../components/Products';
 
-const ProductsPage = () => (
-  <div>
-    <Pagination page={1} />
-    <Products />
-    <Pagination page={1} />
-  </div>
-);
+const OrderPage = () => {
+  const { query } = useRouter();
+  const page = parseInt(query.page);
 
-export default ProductsPage;
+  return (
+    <div>
+      <Pagination page={page || 1} />
+      <Products />
+      <Pagination page={page || 1} />
+    </div>
+  );
+};
+
+export default OrderPage;

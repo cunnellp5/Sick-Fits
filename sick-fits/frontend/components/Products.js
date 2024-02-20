@@ -7,7 +7,7 @@ import { Product } from './Product';
 
 export const ALL_PRODUCTS_QUERY = gql`
   query ALL_PRODUCTS_QUERY($skip: Int = 0) {
-    allProducts {
+    allProducts(skip: $skip) {
       id
       name
       price

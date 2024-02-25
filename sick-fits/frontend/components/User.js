@@ -16,9 +16,5 @@ export const CURRENT_USER_QUERY = gql`
 
 export function useUser() {
   const { data } = useQuery(CURRENT_USER_QUERY);
-  return (
-    <div>
-      <p>User</p>
-    </div>
-  );
+  return data?.authenticatedItem;
 }

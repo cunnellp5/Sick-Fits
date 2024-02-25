@@ -4,7 +4,6 @@ import { useUser } from './User';
 
 const Nav = () => {
   const user = useUser();
-  console.log(user);
 
   return (
     <NavStyles>

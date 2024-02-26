@@ -2,7 +2,7 @@ import { useMutation } from '@apollo/client';
 import { gql } from 'graphql-tag';
 import useForm from '../lib/useForm';
 import DisplayError from './ErrorMessage';
-import CURRENT_USER_QUERY from './User';
+import { CURRENT_USER_QUERY } from './User';
 import Form from './styles/Form';
 
 const SIGNIN_MUTATION = gql`
@@ -29,7 +29,7 @@ export default function SignIn() {
     password: '',
   });
 
-  const [signin, { data, loading }] = useMutation(SIGNIN_MUTATION, {
+  const [signin, { data }] = useMutation(SIGNIN_MUTATION, {
     variables: inputs,
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
   });

@@ -36,7 +36,6 @@ const UPDATE_PRODUCT_MUTATION = gql`
 `;
 
 export default function UpdateProduct({ id }) {
-  console.log(id, 'WHATIUCKKK');
   // get existing product
   const { data, error, loading } = useQuery(SINGLE_PRODUCT_QUERY, {
     variables: {
@@ -52,7 +51,6 @@ export default function UpdateProduct({ id }) {
 
   //   create some state for the form inputs
   const { inputs, handleChange, clearForm } = useForm(data?.Product);
-  console.log(inputs);
 
   //   need a form update
   if (loading) return <p>Loading...</p>;
@@ -62,7 +60,7 @@ export default function UpdateProduct({ id }) {
       onSubmit={async (e) => {
         // todo handle submit
         e.preventDefault();
-        const res = await updateProduct({
+        await updateProduct({
           variables: {
             id,
             name: inputs.name,
@@ -70,7 +68,6 @@ export default function UpdateProduct({ id }) {
             price: inputs.price,
           },
         });
-        console.log(res, 'response');
         // // submit the input fields to the backend; inputs is preloaded with the default values because of the useMutation hook
         // const res = await createProduct();
         // clearForm();

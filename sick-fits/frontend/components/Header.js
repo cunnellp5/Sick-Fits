@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Nav from './Nav';
 import Logo from './styles/Logo';
 import HeaderStyles from './styles/HeaderStyles';
+import Cart from './Cart';
 
 const Header = () => (
   <HeaderStyles>
@@ -14,6 +15,7 @@ const Header = () => (
     <div className="sub-bar">
       <p>Search</p>
     </div>
+    <Cart />
   </HeaderStyles>
 );
 

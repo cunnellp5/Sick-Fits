@@ -5,11 +5,12 @@ import {
   withItemData,
 } from '@keystone-next/keystone/session';
 import 'dotenv/config';
+import { sendPasswordResetEmail } from './lib/mail';
+import { CartItem } from './schemas/CartItem';
 import { Product } from './schemas/Product';
 import { ProductImage } from './schemas/ProductImage';
 import { User } from './schemas/User';
 import { insertSeedData } from './seed-data';
-import { sendPasswordResetEmail } from './lib/mail';
 
 const databaseURL =
   process.env.DATABASE_URL ||
@@ -48,6 +49,7 @@ export default withAuth(
       User,
       Product,
       ProductImage,
+      CartItem,
     }),
     db: {
       adapter: 'knex',

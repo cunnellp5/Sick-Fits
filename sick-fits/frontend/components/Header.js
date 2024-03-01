@@ -3,6 +3,7 @@ import Nav from './Nav';
 import Logo from './styles/Logo';
 import HeaderStyles from './styles/HeaderStyles';
 import Cart from './Cart';
+import Search from './Search';
 
 const Header = () => (
   <HeaderStyles>
@@ -13,7 +14,7 @@ const Header = () => (
       <Nav />
     </div>
     <div className="sub-bar">
-      <p>Search</p>
+      <Search />
     </div>
     <Cart />
   </HeaderStyles>

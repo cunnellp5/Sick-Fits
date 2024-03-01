@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import { useCart } from '../lib/cartState';
+import CartCount from './CartCount';
 import SignOut from './SignOut';
 import { useUser } from './User';
 import NavStyles from './styles/NavStyles';
-import CartCount from './CartCount';
 
 const Nav = () => {
   const user = useUser();

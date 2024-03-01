@@ -3,6 +3,7 @@ import { useCart } from '../lib/cartState';
 import SignOut from './SignOut';
 import { useUser } from './User';
 import NavStyles from './styles/NavStyles';
+import CartCount from './CartCount';
 
 const Nav = () => {
   const user = useUser();
@@ -19,6 +20,12 @@ const Nav = () => {
           <SignOut />
           <button type="button" onClick={openCart}>
             My Cart
+            <CartCount
+              count={user.cart.reduce(
+                (tally, cartItem) => tally + cartItem.quantity,
+                0
+              )}
+            />
           </button>
         </>
       )}

@@ -6,7 +6,7 @@ import {
   useStripe,
 } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import nProgress, { set } from 'nprogress';
+import NProgress from 'nprogress';
 import { useState } from 'react';
 import styled from 'styled-components';
 import SickButton from './styles/SickButton';
@@ -34,7 +34,7 @@ function CheckoutForm() {
     setLoading(true);
 
     // 2. start the page transition
-    nProgress.start();
+    NProgress.start();
 
     // 3. create the payment method via stripe (token comes back here if successful)
     const { error, paymentMethod } = await stripe.createPaymentMethod({
@@ -50,7 +50,7 @@ function CheckoutForm() {
     // 7. close the cart
     // 8. turn the loader off
     setLoading(false);
-    nProgress.done();
+    NProgress.done();
   }
 
   return (

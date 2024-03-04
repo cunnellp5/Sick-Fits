@@ -11,7 +11,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import SickButton from './styles/SickButton';
 
-const CheckoutFromStyles = styled.div`
+const CheckoutFromStyles = styled.form`
   box-shadow: 0 1px 2px 2px rgba(0, 0, 0, 0.04);
   border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 5px;
@@ -57,7 +57,7 @@ function CheckoutForm() {
     <CheckoutFromStyles onSubmit={handleSubmit}>
       {error && <p style={{ fontSize: 12 }}>{error.message}</p>}
       <CardElement />
-      <SickButton type="button">Check out now</SickButton>
+      <SickButton type="submit">Check out now</SickButton>
     </CheckoutFromStyles>
   );
 }

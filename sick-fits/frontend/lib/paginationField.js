@@ -36,7 +36,7 @@ export default function paginationField() {
       // AND there aren't enough items to satisfy how many were requested
 
       // first thing it does is ask the read function for those items
-      //  we can either do one of two things
+      // we can either do one of two things
       // first thing we can do is return the items because they are already in the cache
       // the other thing we can do is return undefined from here (network request)
     },

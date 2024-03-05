@@ -30,7 +30,7 @@ const CREATE_ORDER_MUTATION = gql`
       total
       items {
         id
-        title
+        name
       }
     }
   }
@@ -43,9 +43,9 @@ function CheckoutForm() {
   const [loading, setLoading] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
-  const [checkout, { error: graphQLError }] = useMutation({
-    CREATE_ORDER_MUTATION,
-  });
+  const [checkout, { error: graphQLError }] = useMutation(
+    CREATE_ORDER_MUTATION
+  );
 
   async function handleSubmit(e) {
     // 1. stop form from submitting, turn loader on

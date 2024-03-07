@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { createAuth } from '@keystone-next/auth';
 import { config, createSchema } from '@keystone-next/keystone/schema';
 import {
@@ -12,8 +13,13 @@ import { Order } from './schemas/Order';
 import { OrderItem } from './schemas/OrderItem';
 import { Product } from './schemas/Product';
 import { ProductImage } from './schemas/ProductImage';
+import { Role } from './schemas/Role';
 import { User } from './schemas/User';
 import { insertSeedData } from './seed-data';
+
+interface SessionInterface {
+  session?: { data: Record<string, unknown> };
+}
 
 const databaseURL =
   process.env.DATABASE_URL ||
@@ -33,7 +39,7 @@ const { withAuth } = createAuth({
     // TODO: Add in inital roles here
   },
   passwordResetLink: {
-    async sendToken(args) {
+    async sendToken(args: { token: string; identity: string }) {
       await sendPasswordResetEmail(args.token, args.identity);
     },
   },
@@ -55,6 +61,7 @@ export default withAuth(
       CartItem,
       OrderItem,
       Order,
+      Role,
     }),
     extendGraphqlSchema,
     db: {
@@ -69,10 +76,7 @@ export default withAuth(
     },
     ui: {
       // Show the UI only for people who pass this test
-      isAccessAllowed: ({ session }) => {
-        console.log(session);
-        return !!session?.data;
-      },
+      isAccessAllowed: ({ session }: SessionInterface) => !!session?.data,
     },
     // TODO: Add session values here
     session: withItemData(statelessSessions(sessionConfig), {

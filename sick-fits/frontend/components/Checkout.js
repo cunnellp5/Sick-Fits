@@ -8,9 +8,11 @@ import {
 } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import gql from 'graphql-tag';
+import { useRouter } from 'next/router';
 import NProgress from 'nprogress';
 import { useState } from 'react';
 import styled from 'styled-components';
+import { useCart } from '../lib/cartState';
 import SickButton from './styles/SickButton';
 
 const CheckoutFromStyles = styled.form`
@@ -43,8 +45,13 @@ function CheckoutForm() {
   const [loading, setLoading] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
+  const router = useRouter();
+  const { closeCart } = useCart();
   const [checkout, { error: graphQLError }] = useMutation(
-    CREATE_ORDER_MUTATION
+    CREATE_ORDER_MUTATION,
+    {
+      refetchQueries: ['CURRENT_USER_QUERY'],
+    }
   );
 
   async function handleSubmit(e) {
@@ -61,21 +68,29 @@ function CheckoutForm() {
       card: elements.getElement(CardElement),
     });
 
-    console.log(paymentMethod, 'paymetho');
     // 4. handle any errors from stripe
     if (error) {
       setError(error);
       NProgress.done();
       return; // stops checkout from happening
     }
+
     // 5. send the token from step 3 to our keystone server via a custom mutation
     const order = await checkout({
       variables: {
         token: paymentMethod.id,
       },
     });
+
     // 6. change the page to view the order
+    router.push({
+      pathname: `/order/[id]`,
+      query: { id: order.data.checkout.id },
+    });
+
     // 7. close the cart
+    closeCart();
+
     // 8. turn the loader off
     setLoading(false);
     NProgress.done();

@@ -15,6 +15,7 @@ import { Product } from './schemas/Product';
 import { ProductImage } from './schemas/ProductImage';
 import { Role } from './schemas/Role';
 import { User } from './schemas/User';
+import { permissionsList } from './schemas/fields';
 import { insertSeedData } from './seed-data';
 
 interface SessionInterface {
@@ -80,7 +81,14 @@ export default withAuth(
     },
     // TODO: Add session values here
     session: withItemData(statelessSessions(sessionConfig), {
-      User: 'id name email',
+      User: `
+        id 
+        name 
+        email 
+        role {
+          ${permissionsList.join(' ')}
+        }
+      `,
     }),
   })
 );

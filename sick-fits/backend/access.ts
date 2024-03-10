@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { permissionsList } from './schemas/fields';
 import { ListAccessArgs } from './types';
 
@@ -25,3 +26,23 @@ export const permissions = {
 };
 
 // rule based functions
+// Rules can return a boolean - yes or no - or a filter which limits which products they can CRUD.
+export const rules = {
+  canManageProducts({
+    session,
+  }: ListAccessArgs): boolean | { user: { id: string } } {
+    // 1 do they have permission of canManageProducts
+    if (permissions.canManageProducts({ session })) {
+      return true;
+    }
+    // 2 if not, do they own this item
+    return { user: { id: session.itemId } };
+  },
+  canReadProducts({ session }: ListAccessArgs): boolean | { status: string } {
+    if (permissions.canManageProducts({ session })) {
+      return true; // they can read everything
+    }
+    // they should only see available products (based on the status field)
+    return { status: 'AVAILABLE' };
+  },
+};

@@ -7,7 +7,7 @@ export function isSignedIn({ session }: ListAccessArgs): boolean {
   return !!session;
 }
 
-const generatedPermissions = Object.entries(
+const generatedPermissions = Object.fromEntries(
   permissionsList.map((permission) => [
     permission,
     function ({ session }: ListAccessArgs) {
@@ -19,10 +19,10 @@ const generatedPermissions = Object.entries(
 // permissions check if someone meets a criteria - yes or no
 export const permissions = {
   ...generatedPermissions,
-  // can add more permissions here
-  isAwesome({ session }: ListAccessArgs): boolean {
-    return session?.data.name.includes('philip');
-  },
+  // // can add more permissions here
+  // isAwesome({ session }: ListAccessArgs): boolean {
+  //   return session?.data.name.includes('philip');
+  // },
 };
 
 // rule based functions
@@ -31,14 +31,44 @@ export const rules = {
   canManageProducts({
     session,
   }: ListAccessArgs): boolean | { user: { id: string } } {
+    if (!isSignedIn({ session })) {
+      return false;
+    }
     // 1 do they have permission of canManageProducts
     if (permissions.canManageProducts({ session })) {
       return true;
     }
     // 2 if not, do they own this item
-    return { user: { id: session.itemId } };
+    return { user: { id: session?.itemId || '' } };
+  },
+  canOrder({ session }: ListAccessArgs): boolean | { user: { id: string } } {
+    if (!isSignedIn({ session })) {
+      return false;
+    }
+    // 1 do they have permission of canManageProducts
+    if (permissions.canManageCart({ session })) {
+      return true;
+    }
+    // 2 if not, do they own this item
+    return { user: { id: session?.itemId || '' } };
+  },
+  canManageOrderItems({
+    session,
+  }: ListAccessArgs): boolean | { user: { id: string } } {
+    if (!isSignedIn({ session })) {
+      return false;
+    }
+    // 1 do they have permission of canManageProducts
+    if (permissions.canManageCart({ session })) {
+      return true;
+    }
+    // 2 if not, do they own this item
+    return { order: { user: { id: session?.itemId || '' } } };
   },
   canReadProducts({ session }: ListAccessArgs): boolean | { status: string } {
+    if (!isSignedIn({ session })) {
+      return false;
+    }
     if (permissions.canManageProducts({ session })) {
       return true; // they can read everything
     }
